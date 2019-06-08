@@ -1,1 +1,1 @@
-include ':app', ':AllLoginSharePay', ':WeiXinLoginSharePay'
+include ':app', ':AllLoginSharePay', ':WeiXinLoginSharePay', ':QQ'

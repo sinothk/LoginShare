@@ -16,10 +16,11 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="net.sourceforge.simcpux.MainActivity"
+            android:name=".LoginSharePayDemoMainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask">
@@ -28,22 +29,58 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="sdksample" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent222222" />
+                <!-- 100380359 100381104 222222 -->
             </intent-filter>
         </activity>
 
         <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity android:name="com.sinothk.qq.QQDemoMainActivity"/>
+
+        <!--微信部分-->
+        <activity
+            android:name="net.sourceforge.simcpux.WeiXinMainActivity"
+            android:theme="@style/MMTheme.Basic"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!--<activity-->
+        <!--android:name="net.sourceforge.simcpux.MainActivity"-->
+        <!--android:exported="true"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:launchMode="singleTask">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN" />-->
+        <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.VIEW" />-->
+        <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--<data android:scheme="sdksample" />-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
+
+        <activity
             android:name="com.zkhy.community.wxapi.WXEntryActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:taskAffinity="com.zkhy.community"
-            android:launchMode="singleTask">
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
             android:name="net.sourceforge.simcpux.SendToWXActivity"
@@ -88,7 +125,7 @@
         <activity
             android:name="com.zkhy.community.wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>
