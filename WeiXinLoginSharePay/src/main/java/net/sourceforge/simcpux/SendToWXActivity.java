@@ -374,8 +374,10 @@ public class SendToWXActivity extends Activity {
                 final SendAuth.Req req = new SendAuth.Req();
                 req.scope = "snsapi_userinfo,snsapi_friend,snsapi_message,snsapi_contact";
                 req.state = "none";
+
                 api.sendReq(req);
-                //finish();
+
+//                finish();
             }
         });
 
@@ -384,8 +386,10 @@ public class SendToWXActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+
                 if (user_openId == null || accessToken == null) {
                     showToast("请先获取code");
+
                 } else {
                     Intent intent = new Intent(SendToWXActivity.this, UserInfoActivity.class);
                     intent.putExtra("openId", user_openId);
@@ -549,6 +553,7 @@ public class SendToWXActivity extends Activity {
         user_openId = intent.getStringExtra("openId");
         accessToken = intent.getStringExtra("accessToken");
         refreshToken = intent.getStringExtra("refreshToken");
+
         scope = intent.getStringExtra("scope");
     }
 

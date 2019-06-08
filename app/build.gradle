@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.sinothk.loginSharePay.demo"
+        applicationId "com.zkhy.community"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -14,6 +14,48 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // 签名
+    signingConfigs {
+        release {
+            storeFile file('zkhy_release.jks')
+            storePassword 'Abc123456789'
+            keyAlias 'Abc1_9'
+            keyPassword 'Abc123456789'
+        }
+        debug {
+            storeFile file('zkhy_debug.jks')
+            storePassword 'Abc123456789'
+            keyAlias 'Abc1_9'
+            keyPassword 'Abc123456789'
+        }
+        buildTypes {
+            debug {
+                signingConfig signingConfigs.debug
+            }
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+//    signingConfigs {
+//        debug {
+//            storeFile file("debug.keystore")
+//        }
+//
+//        buildTypes {
+//            debug {
+//                signingConfig signingConfigs.debug
+//            }
+//        }
+//    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "YH_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${buildType.name}_${new Date().format("MMddHH")}.apk"
         }
     }
 }

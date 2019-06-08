@@ -1,4 +1,4 @@
-package net.sourceforge.simcpux.wxapi;
+package com.zkhy.community.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,6 +36,7 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
+
 	private static String TAG = "MicroMsg.WXEntryActivity";
 
     private IWXAPI api;
@@ -44,33 +45,31 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 	private static class MyHandler extends Handler {
 		private final WeakReference<WXEntryActivity> wxEntryActivityWeakReference;
 
-		public MyHandler(WXEntryActivity wxEntryActivity){
-			wxEntryActivityWeakReference = new WeakReference<WXEntryActivity>(wxEntryActivity);
+		MyHandler(WXEntryActivity wxEntryActivity){
+			wxEntryActivityWeakReference = new WeakReference<>(wxEntryActivity);
 		}
 
 		@Override
 		public void handleMessage(Message msg) {
 			int tag = msg.what;
-			switch (tag) {
-				case NetworkUtil.GET_TOKEN: {
-					Bundle data = msg.getData();
-					JSONObject json = null;
-					try {
-						json = new JSONObject(data.getString("result"));
-						String openId, accessToken, refreshToken, scope;
-						openId = json.getString("openid");
-						accessToken = json.getString("access_token");
-						refreshToken = json.getString("refresh_token");
-						scope = json.getString("scope");
-						Intent intent = new Intent(wxEntryActivityWeakReference.get(), SendToWXActivity.class);
-						intent.putExtra("openId", openId);
-						intent.putExtra("accessToken", accessToken);
-						intent.putExtra("refreshToken", refreshToken);
-						intent.putExtra("scope", scope);
-						wxEntryActivityWeakReference.get().startActivity(intent);
-					} catch (JSONException e) {
-						Log.e(TAG, e.getMessage());
-					}
+			if (tag == NetworkUtil.GET_TOKEN) {
+				Bundle data = msg.getData();
+				JSONObject json = null;
+				try {
+					json = new JSONObject(data.getString("result"));
+					String openId, accessToken, refreshToken, scope;
+					openId = json.getString("openid");
+					accessToken = json.getString("access_token");
+					refreshToken = json.getString("refresh_token");
+					scope = json.getString("scope");
+					Intent intent = new Intent(wxEntryActivityWeakReference.get(), SendToWXActivity.class);
+					intent.putExtra("openId", openId);
+					intent.putExtra("accessToken", accessToken);
+					intent.putExtra("refreshToken", refreshToken);
+					intent.putExtra("scope", scope);
+					wxEntryActivityWeakReference.get().startActivity(intent);
+				} catch (JSONException e) {
+					Log.e(TAG, e.getMessage());
 				}
 			}
 		}
@@ -172,10 +171,16 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 
 		if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
 			SendAuth.Resp authResp = (SendAuth.Resp)resp;
+
 			final String code = authResp.code;
+
+//			NetworkUtil.sendWxAPI(handler, String.format("https://api.weixin.qq.com/sns/oauth2/access_token?" +
+//							"appid=%s&secret=%s&code=%s&grant_type=authorization_code", "wxd930ea5d5a258f4f",
+//					"1d6d1d57a3dd063b36d917bc0b44d964", code), NetworkUtil.GET_TOKEN);
+
 			NetworkUtil.sendWxAPI(handler, String.format("https://api.weixin.qq.com/sns/oauth2/access_token?" +
-							"appid=%s&secret=%s&code=%s&grant_type=authorization_code", "wxd930ea5d5a258f4f",
-					"1d6d1d57a3dd063b36d917bc0b44d964", code), NetworkUtil.GET_TOKEN);
+							"appid=%s&secret=%s&code=%s&grant_type=authorization_code", Constants.APP_ID,
+					"5e1b08bb1f645bbeb9c71c4007385371", code), NetworkUtil.GET_TOKEN);
 		}
         finish();
 	}

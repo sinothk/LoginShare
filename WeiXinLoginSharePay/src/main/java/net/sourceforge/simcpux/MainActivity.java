@@ -30,7 +30,6 @@ public class MainActivity extends Activity{
         setContentView(R.layout.main);
 
 		checkPermission();
-
     	api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
 
     	regBtn = (Button) findViewById(R.id.reg_btn);
