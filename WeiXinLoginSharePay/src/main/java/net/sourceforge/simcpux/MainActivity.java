@@ -151,36 +151,6 @@ public class MainActivity extends Activity {
         });
     }
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case SDK_PAY_FLAG:
-
-                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-                    //同步获取结果
-                    String resultInfo = payResult.getResult();
-                    Log.i("Pay", "Pay:" + resultInfo);
-                    String resultStatus = payResult.getResultStatus();
-                    // 判断resultStatus 为9000则代表支付成功
-                    if (TextUtils.equals(resultStatus, "9000")) {
-
-//                        Toast.makeText(PayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-//                        JumpUtil.overlay(PayActivity.this, OrderFormActivity.class);
-//                        finish();
-                    } else {
-//                        Toast.makeText(PayActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-        }
-    };
-
-    private static final int SDK_PAY_FLAG = 1001;
-
-
-
     private void checkPermission() {
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
