@@ -1,7 +1,5 @@
 package net.sourceforge.simcpux.uikit;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,7 +36,7 @@ public class NetworkUtil
         httpsThread.start();
     }
 
-    static class HttpsThread extends Thread {
+    public static class HttpsThread extends Thread {
 
         private Handler handler;
         private String httpsUrl;
@@ -105,7 +103,7 @@ public class NetworkUtil
             }
         }
 
-        private static byte[] httpURLConnectionGet(String url) throws Exception {
+        public static byte[] httpURLConnectionGet(String url) throws Exception {
             HttpURLConnection connection = (HttpURLConnection)new URL(url).openConnection();
             if(connection == null){
                 Log.i(TAG,"open connection failed.");

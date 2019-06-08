@@ -53,6 +53,11 @@
             android:layout_margin="10dp"
             android:text="@string/jump_to_offline_pay"/>
 
+        <Button
+            android:id="@+id/jump_to_online_pay"
+            style="@style/MMLineActionButton"
+            android:layout_margin="10dp"
+            android:text="@string/jump_to_offline_pay"/>
     </LinearLayout>
 
 </ScrollView>
