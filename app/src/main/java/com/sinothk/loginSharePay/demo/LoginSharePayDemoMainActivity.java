@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.sinothk.ali.pay.AliPayDemoMainActivity;
 import com.sinothk.qq.QQDemoMainActivity;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -34,6 +35,6 @@ public class LoginSharePayDemoMainActivity extends Activity {
     }
 
     public void gotoZFB(View view) {
-
+        startActivity(new Intent(this, AliPayDemoMainActivity.class));
     }
 }
